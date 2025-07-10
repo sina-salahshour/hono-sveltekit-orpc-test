@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { api } from '$lib';
 	async function orpctest() {
-		const planet = api.planet.find({ id: 69 });
-		// const res = await api.planet.create({
-		// 	name: 'UrAnus',
-		// 	description: 'this is the best planet ever existed'
-		// });
+		const res = await api.planet.create({
+			name: 'UrAnus',
+			description: 'this is the best planet ever existed'
+		});
 
-		// const list = await api.planet.list({});
+		const list = await api.planet.list({});
 
-		// console.log(list);
+		console.log(list);
 	}
 
 	$effect(() => {
