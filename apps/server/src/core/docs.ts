@@ -11,7 +11,6 @@ const openAPIGenerator = new OpenAPIGenerator({
 })
 
 export const openApiApp = new Hono()
-
     .get('/', Scalar({
         url: '/api/docs/specs',
         baseServerURL: '/',

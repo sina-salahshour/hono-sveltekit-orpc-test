@@ -5,6 +5,7 @@ import { RPCHandler } from '@orpc/server/fetch'
 import { OpenAPIHandler } from "@orpc/openapi/fetch";
 import { openApiApp } from "./docs";
 import { router } from "./router";
+import { experimental_ZodSmartCoercionPlugin } from "@orpc/zod/zod4";
 
 
 export const app = new Hono().basePath('/api');
@@ -13,7 +14,11 @@ app.use(logger());
 app.route('/docs', openApiApp)
 
 
-const openApiHandler = new OpenAPIHandler(router);
+const openApiHandler = new OpenAPIHandler(router, {
+    plugins: [
+        new experimental_ZodSmartCoercionPlugin()
+    ]
+});
 app.use("/openapi/*", async (c, next) => {
     const { matched, response } = await openApiHandler.handle(c.req.raw, {
         prefix: "/api/openapi",
