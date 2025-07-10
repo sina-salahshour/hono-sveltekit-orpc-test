@@ -1,5 +1,5 @@
 import { ORPCError } from "@orpc/contract"
-import { os } from "../os"
+import { os } from "@core/os"
 
 type Planet = {
     id: number

@@ -1,11 +1,24 @@
 import { Hono } from "hono"
-import { router } from "./router"
-import { swaggerUI } from "@hono/swagger-ui"
 import { OpenAPIGenerator } from "@orpc/openapi"
 import { experimental_ZodToJsonSchemaConverter } from "@orpc/zod/zod4"
+import { Scalar } from "@scalar/hono-api-reference"
+import { router } from "./router"
 
-export const swaggerApp = new Hono().get
-    ("/specs", async (c) => {
+const openAPIGenerator = new OpenAPIGenerator({
+    schemaConverters: [
+        new experimental_ZodToJsonSchemaConverter(),
+    ],
+})
+
+export const openApiApp = new Hono()
+
+    .get('/', Scalar({
+        url: '/api/docs/specs',
+        baseServerURL: '/',
+        layout: 'modern',
+        theme: "alternate",
+    }))
+    .get("/specs", async (c) => {
         const spec = await openAPIGenerator.generate(router, {
             info: {
                 title: 'My Playground',
@@ -26,9 +39,3 @@ export const swaggerApp = new Hono().get
         })
         return c.json(spec)
     })
-    .get('/', swaggerUI({ url: '/api/swagger/specs' }))
-const openAPIGenerator = new OpenAPIGenerator({
-    schemaConverters: [
-        new experimental_ZodToJsonSchemaConverter(),
-    ],
-})

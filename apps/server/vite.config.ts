@@ -18,6 +18,7 @@ export default defineConfig({
     resolve: {
         alias: {
             "@internal/contract": resolve(_dirname, "../../packages/contract/src"),
+            "@core": resolve(_dirname, "./src/core"),
         }
     },
 })
