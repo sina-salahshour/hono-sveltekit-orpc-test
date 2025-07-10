@@ -16,6 +16,7 @@ export const openApiApp = new Hono()
         baseServerURL: '/',
         layout: 'modern',
         theme: "alternate",
+        persistAuth: true,
     }))
     .get("/specs", async (c) => {
         const spec = await openAPIGenerator.generate(router, {

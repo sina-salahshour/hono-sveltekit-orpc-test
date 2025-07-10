@@ -11,7 +11,7 @@ const oldListPlanetContract = oc
     .route({
         description: "List all planets.\n\n warning: Use the new pagination contract instead.",
         deprecated: true,
-
+        summary: "[deprecated] getAll"
     })
     .input(
         z.object({
@@ -21,7 +21,10 @@ const oldListPlanetContract = oc
     )
     .output(z.array(PlanetSchema))
 const listPlanetContract = oc
-    .route({ description: "List all planets" })
+    .route({
+        description: "List all planets",
+        summary: 'list'
+    })
     .input(
         z.object({
             limit: z.number().int().min(1).max(100).optional(),
@@ -31,17 +34,23 @@ const listPlanetContract = oc
     .output(z.array(PlanetSchema))
 
 const findPlanetContract = oc
-    .route({ description: "Find a planet by ID" })
+    .route({
+        description: "Find a planet by ID",
+        summary: "find"
+    })
     .input(PlanetSchema.pick({ id: true }))
     .output(PlanetSchema)
 
 const createPlanetContract = oc
-    .route({ description: "Create a new planet" })
+    .route({
+        description: "Create a new planet",
+        summary: "create"
+    })
     .input(PlanetSchema.omit({ id: true }))
     .output(PlanetSchema)
 
 export const planetContract = oc
-    .tag('planet')
+    .tag('Planet')
     .router({
         list: listPlanetContract,
         find: findPlanetContract,
