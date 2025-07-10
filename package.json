@@ -1,0 +1,24 @@
+{
+  "name": "p01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm -r dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.13.1",
+  "type": "module",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "esbuild"
+    ]
+  },
+  "dependencies": {
+    "@orpc/contract": "^1.6.6",
+    "zod": "^4.0.2"
+  }
+}

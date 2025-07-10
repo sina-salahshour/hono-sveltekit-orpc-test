@@ -1,0 +1,34 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"moduleResolution": "bundler",
+		"target": "ESNext",
+		"module": "esnext",
+		"strict": true,
+		"verbatimModuleSyntax": false,
+		"skipLibCheck": true,
+		"types": [
+			"node"
+		],
+		"jsx": "react-jsx",
+		"jsxImportSource": "hono/jsx",
+		"outDir": "./dist",
+		"paths": {
+			"@internal/contract": [
+				"../../packages/contract/src"
+			],
+			"@internal/contract/*": [
+				"../../packages/contract/src/*"
+			]
+		}
+	},
+	"exclude": [
+		"node_modules",
+		"./dist/**"
+	]
+}
