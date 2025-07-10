@@ -20,6 +20,7 @@ const oldListPlanetContract = oc
         }),
     )
     .output(z.array(PlanetSchema))
+
 const listPlanetContract = oc
     .route({
         description: "List all planets",
@@ -36,10 +37,15 @@ const listPlanetContract = oc
 const findPlanetContract = oc
     .route({
         description: "Find a planet by ID",
-        summary: "find"
+        summary: "find",
     })
     .input(PlanetSchema.pick({ id: true }))
     .output(PlanetSchema)
+    .errors({
+        NOT_FOUND: {
+            message: "planet not found",
+        }
+    })
 
 const createPlanetContract = oc
     .route({

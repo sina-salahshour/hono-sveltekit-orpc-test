@@ -17,6 +17,8 @@ export const openApiApp = new Hono()
         layout: 'modern',
         theme: "alternate",
         persistAuth: true,
+        cdn: "/api/static/scalar-api-reference",
+        withDefaultFonts: false
     }))
     .get("/specs", async (c) => {
         const spec = await openAPIGenerator.generate(router, {

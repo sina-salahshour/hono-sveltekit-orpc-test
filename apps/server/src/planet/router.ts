@@ -19,13 +19,11 @@ const listPlanet = os.planet.list
         return planets
     })
 const findPlanet = os.planet.find
-    .handler(({ input }) => {
+    .handler(({ input, errors }) => {
         const res = planets.find(item => item.id === input.id)
 
         if (res == null) {
-            throw new ORPCError("NOT_FOUND", {
-                message: "planet not found"
-            })
+            throw errors.NOT_FOUND()
         }
 
         return res

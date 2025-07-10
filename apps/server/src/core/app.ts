@@ -6,6 +6,7 @@ import { OpenAPIHandler } from "@orpc/openapi/fetch";
 import { openApiApp } from "./docs";
 import { router } from "./router";
 import { experimental_ZodSmartCoercionPlugin } from "@orpc/zod/zod4";
+import { serveStatic } from "@hono/node-server/serve-static";
 
 
 export const app = new Hono().basePath('/api');
@@ -13,6 +14,10 @@ app.use(logger());
 
 app.route('/docs', openApiApp)
 
+app.use('/static/*', serveStatic({
+    root: './static/',
+    rewriteRequestPath: (path) => path.substring('/api/static/'.length)
+}))
 
 const openApiHandler = new OpenAPIHandler(router, {
     plugins: [
