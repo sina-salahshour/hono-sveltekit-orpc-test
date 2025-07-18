@@ -1,10 +1,10 @@
 import { oc } from '@orpc/contract'
-import z from 'zod/v4'
+import z4 from 'zod/v4'
 
-const PlanetSchema = z.object({
-    id: z.number().int().min(1),
-    name: z.string(),
-    description: z.string().optional(),
+export const PlanetSchema = z4.object({
+    id: z4.number().int().min(1),
+    name: z4.string(),
+    description: z4.string().optional(),
 })
 
 const oldListPlanetContract = oc
@@ -14,12 +14,12 @@ const oldListPlanetContract = oc
         summary: "[deprecated] getAll"
     })
     .input(
-        z.object({
-            page: z.number().int().min(1).default(1),
-            pageSize: z.number().int().min(1).max(100).default(10),
+        z4.object({
+            page: z4.number().int().min(1).default(1),
+            pageSize: z4.number().int().min(1).max(100).default(10),
         }),
     )
-    .output(z.array(PlanetSchema))
+    .output(z4.array(PlanetSchema))
 
 const listPlanetContract = oc
     .route({
@@ -27,12 +27,12 @@ const listPlanetContract = oc
         summary: 'list'
     })
     .input(
-        z.object({
-            limit: z.number().int().min(1).max(100).optional(),
-            cursor: z.number().int().min(0).default(0),
+        z4.object({
+            limit: z4.number().int().min(1).max(100).optional(),
+            cursor: z4.number().int().min(0).default(0),
         }),
     )
-    .output(z.array(PlanetSchema))
+    .output(z4.array(PlanetSchema))
 
 const findPlanetContract = oc
     .route({

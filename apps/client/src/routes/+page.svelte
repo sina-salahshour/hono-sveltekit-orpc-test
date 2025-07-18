@@ -2,9 +2,10 @@
 	import { api } from '$lib';
 	async function orpctest() {
 		const res = await api.planet.create({
-			name: 'UrAnus',
+			name: 'Mars',
 			description: 'this is the best planet ever existed'
 		});
+		void res;
 
 		const list = await api.planet.list({});
 

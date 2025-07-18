@@ -27,7 +27,9 @@ const openApiHandler = new OpenAPIHandler(router, {
 app.use("/openapi/*", async (c, next) => {
     const { matched, response } = await openApiHandler.handle(c.req.raw, {
         prefix: "/api/openapi",
-        context: {},
+        context: {
+            header: c.req.header.bind(c.req)
+        },
     });
 
     if (matched) {
@@ -40,7 +42,9 @@ const rpcHandler = new RPCHandler(router);
 app.use("/rpc/*", async (c, next) => {
     const { matched, response } = await rpcHandler.handle(c.req.raw, {
         prefix: "/api/rpc",
-        context: {},
+        context: {
+            header: c.req.header.bind(c.req)
+        },
     });
 
     if (matched) {
